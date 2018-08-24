@@ -11,7 +11,7 @@ a lua interpreter if autorun.lua
 does not exist.
 ]]
 _osname = 'Liskel OS'
-_osversion = '2.1.2'
+_osversion = '2.2.1'
 -- ========== INIT START ========== --
 --+-+-+-+-+ Require +-+-+-+-+--
 function require(pkg)
@@ -218,50 +218,38 @@ function console.history.PrintAll()
 end
 function console.history.Update()
   -- update viewport
-  console.history.PrintAll() -- temporary
-  -- move currently displayed text up/down
-  -- display new lines
-  --[[
   if next(console.history.mem) == nil then return end
   if console.history.scrdir == 0 then
-    --console.history.PrintAll()
-    for i = 1, console.history.viewheight - 1  do
-      local bot = (console.history.viewbottom - console.history.viewheight) + (i - 1)
-      if bot <= 0 then return end
-      local toprint = console.history.mem[bot]
-      local cpos = console.history.viewheight
-      g.copy(1,3, w, h-3, 0, -1)
-      console.lineoutoff(toprint, cpos, console.history.printoffset)
-    end
+    console.history.PrintAll()
   elseif console.history.scrdir > 0 then
     -- user scrolled up
+    g.copy(1,2, w, h-console.history.scrspeed-2, 0, console.history.scrspeed)
     for i = 1, console.history.scrspeed do
       local bot = (console.history.viewbottom - console.history.viewheight + 1 + console.history.scrspeed) - (i - 1)
       if bot <= 0 then return end
       local toprint = console.history.mem[bot]
-      g.copy(1,2, w, h-3, 0, 1)
-      console.lineoutoff(toprint, 2, console.history.printoffset)
+      local cpos = 1 + console.history.scrspeed - (i - 1)
+      console.lineoutoff(toprint, cpos, console.history.printoffset)
     end
   elseif console.history.scrdir < 0 then
     -- user scrolled down
+    g.copy(1,2 + console.history.scrspeed, w, h-console.history.scrspeed-2, 0, -console.history.scrspeed)
     for i = 1, console.history.scrspeed do
-      local bot = (console.history.viewbottom - console.history.scrspeed + 1) + (i - 1)
+      local bot = console.history.viewbottom - (i - 1)
       if bot <= 0 then return end
       local toprint = console.history.mem[bot]
-      local cpos = console.history.viewheight
-      g.copy(1,3, w, h-3, 0, -1)
+      local cpos = console.history.viewheight - (i - 1)
       console.lineoutoff(toprint, cpos, console.history.printoffset)
     end
   end
   console.history.scrdir = 0 -- reset
-  ]]
 end
 function console.history.ScrollEnd()
   console.history.prevbottom = console.history.viewbottom
   console.history.viewbottom = #console.history.mem
   console.history.PrintAll() -- reprint history
 end
-function console.historyScrollTop()
+function console.history.ScrollTop()
   console.history.prevbottom = console.history.viewbottom
   console.history.viewbottom = h - 2
   console.history.PrintAll() -- reprint history
@@ -271,20 +259,22 @@ function console.history.ScrollUp(scr)
   if #console.history.mem < console.history.viewheight then return end
   console.history.prevbottom = console.history.viewbottom
   console.history.viewbottom = console.history.viewbottom - scr
+  console.history.scrdir = 1
   if console.history.viewbottom <= console.history.viewheight - 1 then
+    console.history.scrdir = 0
     console.history.viewbottom = console.history.viewheight - 1
   end
-  console.history.scrdir = 1
   console.history.Update() -- print out history
 end
 function console.history.ScrollDown(scr)
   scr = scr or 1
   console.history.prevbottom = console.history.viewbottom
   console.history.viewbottom = console.history.viewbottom + scr
+  console.history.scrdir = -1
   if console.history.viewbottom >= #console.history.mem then
+    console.history.scrdir = 0
     console.history.viewbottom = #console.history.mem
   end
-  console.history.scrdir = -1
   console.history.Update() -- print out history
 end
 function console.history.MoveRecall(pos)
