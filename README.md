@@ -21,10 +21,10 @@ Previous version: OS 1.8
  * Liskel 2.1 offers a modular design and an improved system management
 
 ##How to use
-*Note: Some commands in OpenOS are not available in Liskel since they are implemented in OpenOS and thus are not
-in the core libraries.*
+ * Note: Some commands in OpenOS are not available in Liskel since they are implemented in OpenOS and thus are not
+in the core libraries. *
 
-*Based on OS 2.1*
+ * Based on OS 2.1 *
 
 Print to console:
 ```lua
