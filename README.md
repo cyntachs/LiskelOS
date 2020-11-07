@@ -1,13 +1,13 @@
-#Liskel OS
+# Liskel OS
 
 A basic [OpenComputers][1] operating system that is fast and lightweight.
 
-===
-Current version: OS 2.1
+## Versions
 
-Previous version: OS 1.8
+Current version: [LiskelOS 2.2.1](https://github.com/cyntachs/LiskelOS/blob/master/src/liskel2.lua)
+Previous version: [LiskelOS 1.8](https://github.com/cyntachs/LiskelOS/blob/master/src/liskel.lua) (Deprecated)
 
-##Features
+## Features
  * Basic lightweight file input and output library.
  * Basic lightweight graphics library.
  * Shuts down and starts up instantly on any computer.
@@ -20,7 +20,18 @@ Previous version: OS 1.8
  * Basically a barebones operating system designed for use with developing custom BIOS'es and OS'es
  * Liskel 2.1 offers a modular design and an improved system management
 
-##How to use
+## Installation
+To install LiskelOS follow these steps:
+ * In OpenOS, mount an empty drive (`mount`)
+ * Go into where the drive is mounted (`cd`)
+ * Create an `init.lua` file in the drive using the text editor (`edit init.lua`)
+ * Copy the LiskelOS code from here: [liskel2.lua](https://github.com/cyntachs/LiskelOS/blob/master/src/liskel2.lua)
+ * Paste the code into the new file. `[Middle Mouse Button]` or `[Insert]` to paste.
+ * Press `[Ctrl-S]` to save and `[Ctrl-W]` to exit the text editor.
+ * Shutdown and remove other drives with an OS to ensure that LiskelOS is selected by the EEPROM at boot
+ * Start up the computer
+
+## How to use
  * Note: Some commands in OpenOS are not available in Liskel since they are implemented in OpenOS and thus are not
 in the core libraries. *
 
