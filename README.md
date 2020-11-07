@@ -5,6 +5,7 @@ A basic [OpenComputers][1] operating system that is fast and lightweight.
 ## Versions
 
 Current version: [LiskelOS 2.2.1](https://github.com/cyntachs/LiskelOS/blob/master/src/liskel2.lua)
+
 Previous version: [LiskelOS 1.8](https://github.com/cyntachs/LiskelOS/blob/master/src/liskel.lua) (Deprecated)
 
 ## Features
@@ -26,8 +27,8 @@ To install LiskelOS follow these steps:
  * Go into where the drive is mounted (`cd`)
  * Create an `init.lua` file in the drive using the text editor (`edit init.lua`)
  * Copy the LiskelOS code from here: [liskel2.lua](https://github.com/cyntachs/LiskelOS/blob/master/src/liskel2.lua)
- * Paste the code into the new file. `[Middle Mouse Button]` or `[Insert]` to paste.
- * Press `[Ctrl-S]` to save and `[Ctrl-W]` to exit the text editor.
+ * Paste the code into the new file. `[Middle Mouse Button]` or `[Insert]` to paste
+ * Press `[Ctrl-S]` to save and `[Ctrl-W]` to exit the text editor
  * Shutdown and remove other drives with an OS to ensure that LiskelOS is selected by the EEPROM at boot
  * Start up the computer
 
